@@ -24,3 +24,22 @@ One-time setup: in the repository on GitHub, go to **Settings > Pages** and set 
 
 - `index.html`: the site
 - `.github/workflows/deploy.yml`: the GitHub Pages deployment workflow
+
+## Help Desk
+
+`helpdesk.html` (with `helpdesk.css` and `helpdesk.js`) is a small ticket tracker: priority P1 to P3, response targets, statuses and an Overdue label. Tickets are saved in the browser's localStorage and the demo data is fake.
+
+## Diagnostic tools
+
+Read-only Node.js scripts in `tools/` (Node 18.15 or newer, no dependencies). They only query the system and never change any setting.
+
+```sh
+node tools/health-report.js        # OS, free disk space, firewall status, pending updates (Windows)
+node tools/network-doctor.js       # router, then 1.1.1.1, then a website name; names the first failing step
+node tools/network-doctor.js github.com   # use a different website name
+node --test tools                  # run the tests (they use fake command output)
+```
+
+Each check prints PASS or FAIL (or SKIP when it cannot be read). Many routers ignore ping, so the router check also tries a TCP connection and does not blame the router when the internet works through it.
+
+`troubleshoot.html` is a click-through "no internet" decision tree.
