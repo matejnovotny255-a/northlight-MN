@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Help Desk</title>
+  <link rel="stylesheet" href="helpdesk.css">
+</head>
+<body>
+  <header>
+    <h1>Help Desk</h1>
+    <p>Log an issue, track it against its response target. <a href="index.html">Back to Northlight Studio</a></p>
+  </header>
+
+  <div class="wrap">
+    <section aria-labelledby="form-h">
+      <h2 id="form-h">New ticket</h2>
+      <form id="form" novalidate>
+        <label>Requester
+          <input name="requester" maxlength="80" autocomplete="off"><span class="err"></span></label>
+        <label>Issue
+          <textarea name="issue" rows="4" maxlength="500"></textarea><span class="err"></span></label>
+        <label>Impact
+          <select name="impact"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        <label>Urgency
+          <select name="urgency"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        <p class="hint" id="preview"></p>
+        <button type="submit">Create ticket</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="list-h">
+      <h2 id="list-h">Tickets (<span id="count">0</span>)</h2>
+      <ul id="list"></ul>
+    </section>
+  </div>
+
+  <script src="helpdesk.js"></script>
+</body>
+</html>
