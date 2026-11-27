@@ -59,3 +59,7 @@ Each check prints PASS or FAIL (or SKIP when it cannot be read). Many routers ig
 
 - **SEO and GEO basics:** a title under 60 characters, a description under 155, one H1, alt text on every image, canonical and Open Graph tags, `Organization` and `FAQPage` JSON-LD, `robots.txt` and `sitemap.xml`. The FAQ JSON-LD must stay word-for-word identical to the visible FAQ; if you edit one, edit the other.
 - **Contact form:** each field shows a clear error message. A valid message creates a ticket in the Help Desk storage (`helpdesk.tickets.v2`, impact Low, urgency from the form, status New), so it appears on `helpdesk.html`. Website ticket numbers start at HD-1006, above the demo tickets.
+
+## Design
+
+All four pages share one look: `site.css` holds the colours, header, footer, buttons, forms, tables and cards, and `helpdesk.css` adds only the ticket-list styling. It uses system fonts (no outside resources), follows the visitor's light or dark setting, works at phone width and shows a visible focus ring for keyboard users. To restyle the whole site, change the colour variables at the top of `site.css`.

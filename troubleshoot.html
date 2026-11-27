@@ -4,40 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>No Internet Troubleshooter</title>
-  <style>
-    :root { --bg: #f4f6f9; --card: #fff; --text: #1c2733; --muted: #5d6b7a; --line: #dde3ea; --accent: #1f5fbf; --ok: #2e7d32; --warn: #b26a00; }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); }
-    header { background: #0f1b2d; color: #fff; padding: 1.25rem 1rem; }
-    header h1 { margin: 0; font-size: 1.5rem; }
-    header p { margin: .25rem 0 0; color: #b9c4d3; }
-    header a { color: #fff; }
-    main { max-width: 40rem; margin: 0 auto; padding: 1.5rem 1rem; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: 1.25rem; }
-    .trail { color: var(--muted); font-size: .85rem; margin: 0 0 1rem; }
-    h2 { margin: 0 0 .75rem; font-size: 1.25rem; }
-    .help { color: var(--muted); margin: 0 0 1rem; line-height: 1.5; }
-    .options { display: grid; gap: .6rem; }
-    button { font: inherit; text-align: left; background: #fff; color: var(--text); border: 1px solid var(--line); border-radius: .4rem; padding: .75rem 1rem; cursor: pointer; }
-    button:hover, button:focus-visible { border-color: var(--accent); outline: 2px solid var(--accent); }
-    button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .nav { display: flex; gap: .6rem; margin-top: 1rem; }
-    .nav button { text-align: center; }
-    .result { border-left: 5px solid var(--ok); }
-    .result.escalate { border-left-color: var(--warn); }
-    .tag { display: inline-block; font-size: .75rem; font-weight: 700; color: #fff; background: var(--ok); border-radius: 99px; padding: .15rem .6rem; margin-bottom: .5rem; }
-    .escalate .tag { background: var(--warn); }
-    code { background: #eef2f7; padding: .1rem .35rem; border-radius: .25rem; }
-  </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <header>
-    <h1>No internet? Let's find out why</h1>
-    <p>Answer a few questions. This guide only suggests steps, it changes nothing. <a href="index.html">Back to Northlight Studio</a></p>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="helpdesk.html">Help Desk</a></li>
+          <li><a href="troubleshoot.html" aria-current="page">Troubleshoot</a></li>
+          <li><a href="staff.html">Staff</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  <main>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>No internet? Let's find out why</h1>
+      <p>Answer a few questions. This guide only suggests steps and changes nothing.</p>
+    </div>
+  </div>
+  <main class="wrap page-body narrow">
     <div class="card" id="card" aria-live="polite"></div>
   </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Northlight Studio. A demo site with fake data.</span>
+      <span><a href="index.html">Home</a> · <a href="helpdesk.html">Help Desk</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
+    </div>
+  </footer>
 
   <script>
     // Decision tree: each node is a question (options) or a result (fix / escalate).

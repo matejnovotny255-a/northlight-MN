@@ -39,59 +39,17 @@
   }
   </script>
 
-  <style>
-    :root { --bg: #f7f8fa; --card: #fff; --text: #1c2733; --muted: #5d6b7a; --line: #dde3ea; --navy: #0f1b2d; --accent: #1f5fbf; --bad: #b71c1c; --good: #2e7d32; }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    a { color: var(--accent); }
-    .wrap { max-width: 60rem; margin: 0 auto; padding: 0 1rem; }
-    header { background: var(--navy); color: #fff; }
-    header .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding-top: .75rem; padding-bottom: .75rem; }
-    .brand { font-weight: 700; font-size: 1.15rem; color: #fff; text-decoration: none; }
-    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: 0; padding: 0; }
-    nav a { color: #dbe6f7; text-decoration: none; padding: .35rem 0; display: inline-block; }
-    nav a:hover, nav a:focus-visible { color: #fff; text-decoration: underline; }
-    .hero { background: var(--navy); color: #fff; padding: 2rem 0 2.5rem; }
-    .hero .wrap { display: grid; gap: 1.5rem; grid-template-columns: 1.1fr 1fr; align-items: center; }
-    @media (max-width: 42rem) { .hero .wrap { grid-template-columns: 1fr; } }
-    h1 { font-size: clamp(1.9rem, 6vw, 2.75rem); line-height: 1.15; margin: 0 0 1rem; }
-    .hero p { font-size: 1.1rem; margin: 0 0 1.25rem; color: #dbe6f7; }
-    .hero img { width: 100%; height: auto; border-radius: .6rem; display: block; }
-    .btn { display: inline-block; background: #f6c453; color: #1c2733; font-weight: 700; text-decoration: none; padding: .7rem 1.2rem; border-radius: .4rem; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
-    .btn:hover, .btn:focus-visible { filter: brightness(1.05); outline: 2px solid #fff; outline-offset: 2px; }
-    section.block { padding: 2.5rem 0; }
-    h2 { font-size: 1.6rem; margin: 0 0 1.25rem; }
-    .cards { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 42rem) { .cards { grid-template-columns: 1fr; } }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: 1.25rem; }
-    .card img { width: 3rem; height: 3rem; display: block; margin-bottom: .5rem; }
-    .card h3 { margin: 0 0 .4rem; font-size: 1.15rem; }
-    .card p { margin: 0; color: var(--muted); }
-    details { background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: .85rem 1rem; margin-bottom: .6rem; }
-    summary { font-weight: 600; cursor: pointer; }
-    details p { margin: .6rem 0 0; color: var(--muted); }
-    form { background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: 1.25rem; max-width: 36rem; }
-    label { display: block; font-weight: 600; margin-bottom: 1rem; }
-    input, select, textarea { display: block; width: 100%; margin-top: .3rem; padding: .6rem .7rem; font: inherit; border: 1px solid #b8c2cf; border-radius: .35rem; background: #fff; color: var(--text); }
-    input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
-    [aria-invalid="true"] { border-color: var(--bad); }
-    .err { display: block; color: var(--bad); font-weight: 400; font-size: .9rem; min-height: 1.1em; margin-top: .25rem; }
-    #formStatus { margin: 1rem 0 0; font-weight: 600; }
-    #formStatus.ok { color: var(--good); } #formStatus.bad { color: var(--bad); }
-    footer { background: var(--navy); color: #b9c4d3; padding: 1.5rem 0; font-size: .9rem; }
-    footer a { color: #dbe6f7; }
-  </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <a class="brand" href="index.html">Northlight Studio</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
       <nav aria-label="Main">
         <ul>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
           <li><a href="helpdesk.html">Help Desk</a></li>
           <li><a href="troubleshoot.html">Troubleshoot</a></li>
           <li><a href="staff.html">Staff</a></li>
@@ -104,9 +62,10 @@
     <div class="hero">
       <div class="wrap">
         <div>
+          <p class="eyebrow">Design studio · 25 people</p>
           <h1>Design that makes your work stand out</h1>
           <p>Northlight Studio is a design studio of 25 people. We craft clear, thoughtful brands, products and experiences.</p>
-          <a class="btn" href="#contact">Start a project</a>
+          <a class="btn gold" href="#contact">Start a project</a>
         </div>
         <img src="assets/hero.svg" width="640" height="320" alt="Illustration of a sun rising behind blue mountains, representing the Northlight Studio brand">
       </div>
@@ -115,6 +74,7 @@
     <section class="block" id="services" aria-labelledby="services-h">
       <div class="wrap">
         <h2 id="services-h">What we do</h2>
+        <p class="lead">Three ways we can help, from a first logo to a whole product.</p>
         <div class="cards">
           <article class="card">
             <img src="assets/icon-brand.svg" width="48" height="48" alt="Triangle icon for brand identity">
@@ -135,7 +95,7 @@
       </div>
     </section>
 
-    <section class="block" id="faq" aria-labelledby="faq-h" style="padding-top:0">
+    <section class="block" id="faq" aria-labelledby="faq-h">
       <div class="wrap">
         <h2 id="faq-h">Frequently asked questions</h2>
         <details>
@@ -157,7 +117,7 @@
       </div>
     </section>
 
-    <section class="block" id="contact" aria-labelledby="contact-h" style="padding-top:0">
+    <section class="block" id="contact" aria-labelledby="contact-h">
       <div class="wrap">
         <h2 id="contact-h">Contact us</h2>
         <form id="contactForm" novalidate>
@@ -190,8 +150,11 @@
     </section>
   </main>
 
-  <footer>
-    <div class="wrap">Northlight Studio. Demo site with fake data. <a href="helpdesk.html">Help Desk</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></div>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Northlight Studio. A demo site with fake data.</span>
+      <span><a href="index.html">Home</a> · <a href="helpdesk.html">Help Desk</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
+    </div>
   </footer>
 
   <script>

@@ -4,15 +4,33 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Help Desk</title>
+  <link rel="stylesheet" href="site.css">
   <link rel="stylesheet" href="helpdesk.css">
 </head>
 <body>
-  <header>
-    <h1>Help Desk</h1>
-    <p>Log an issue, track it against its response target. <a href="index.html">Back to Northlight Studio</a></p>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="helpdesk.html" aria-current="page">Help Desk</a></li>
+          <li><a href="troubleshoot.html">Troubleshoot</a></li>
+          <li><a href="staff.html">Staff</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Help Desk</h1>
+      <p>Log an issue and track it against its response target.</p>
+    </div>
+  </div>
 
-  <div class="wrap">
+  <div class="wrap page-body layout">
     <section aria-labelledby="form-h">
       <h2 id="form-h">New ticket</h2>
       <form id="form" novalidate>
@@ -34,6 +52,13 @@
       <ul id="list"></ul>
     </section>
   </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Northlight Studio. A demo site with fake data.</span>
+      <span><a href="index.html">Home</a> · <a href="helpdesk.html">Help Desk</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
+    </div>
+  </footer>
 
   <script src="helpdesk.js"></script>
 </body>
