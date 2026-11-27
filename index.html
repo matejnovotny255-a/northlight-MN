@@ -65,7 +65,15 @@
           <p class="eyebrow">Design studio · 25 people</p>
           <h1>Design that makes your work stand out</h1>
           <p>Northlight Studio is a design studio of 25 people. We craft clear, thoughtful brands, products and experiences.</p>
-          <a class="btn gold" href="#contact">Start a project</a>
+          <div class="cta">
+            <a class="btn" href="#contact">Start a project</a>
+            <a class="btn ghost" href="#services">See what we do</a>
+          </div>
+          <ul class="facts" aria-label="Studio facts">
+            <li><strong>25</strong><span>designers and leads</span></li>
+            <li><strong>4–12</strong><span>weeks per project</span></li>
+            <li><strong>3</strong><span>core services</span></li>
+          </ul>
         </div>
         <img src="assets/hero.svg" width="640" height="320" alt="Illustration of a sun rising behind blue mountains, representing the Northlight Studio brand">
       </div>
@@ -119,8 +127,12 @@
 
     <section class="block" id="contact" aria-labelledby="contact-h">
       <div class="wrap">
-        <h2 id="contact-h">Contact us</h2>
-        <form id="contactForm" novalidate>
+        <div class="contact-grid">
+          <div>
+            <h2 id="contact-h">Tell us about your project</h2>
+            <p class="lead">Send a short message and we will reply with next steps. Your enquiry is logged as a ticket so it never gets lost.</p>
+          </div>
+          <form id="contactForm" novalidate>
           <label for="cName">Your name
             <input id="cName" name="name" autocomplete="name" maxlength="80" aria-describedby="cNameErr">
             <span class="err" id="cNameErr"></span></label>
@@ -146,6 +158,7 @@
           <button class="btn" type="submit">Send message</button>
           <p id="formStatus" role="status" tabindex="-1"></p>
         </form>
+        </div>
       </div>
     </section>
   </main>
