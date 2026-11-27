@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://matejnovotny255-a.github.io/northlight-MN/sitemap.xml

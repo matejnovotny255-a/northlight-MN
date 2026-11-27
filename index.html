@@ -3,32 +3,265 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Northlight Studio</title>
-  <meta name="description" content="Northlight Studio is a 25-person design studio.">
+  <title>Northlight Studio | 25-Person Design Studio</title>
+  <meta name="description" content="Northlight Studio is a 25-person design studio creating brand identities, web and product design, and design workshops.">
+  <link rel="canonical" href="https://matejnovotny255-a.github.io/northlight-MN/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Northlight Studio | 25-Person Design Studio">
+  <meta property="og:description" content="A 25-person design studio creating brand identities, web and product design, and design workshops.">
+  <meta property="og:url" content="https://matejnovotny255-a.github.io/northlight-MN/">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self'">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Northlight Studio",
+    "url": "https://matejnovotny255-a.github.io/northlight-MN/",
+    "description": "Northlight Studio is a 25-person design studio creating brand identities, web and product design, and design workshops.",
+    "numberOfEmployees": { "@type": "QuantitativeValue", "value": 25 }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What does Northlight Studio do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Northlight Studio is a 25-person design studio. We create brand identities, web and product design, and design workshops for clients who want to stand out." } },
+      { "@type": "Question", "name": "How big is the team?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Our team has 25 people, including brand designers, product designers and project leads." } },
+      { "@type": "Question", "name": "How long does a project take?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most projects take between 4 and 12 weeks, depending on scope. We agree a timeline with you before we start." } },
+      { "@type": "Question", "name": "How do I start a project?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Send us a message with the contact form on this page. We reply with next steps, and your enquiry is logged as a ticket so it does not get lost." } }
+    ]
+  }
+  </script>
+
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: system-ui, sans-serif;
-      background: #0f1b2d;
-      color: #f4f1ea;
-    }
-    main { max-width: 36rem; padding: 0 1rem; }
-    h1 { font-size: 2.5rem; margin: 0 0 1rem; }
-    p { font-size: 1.125rem; line-height: 1.6; margin: 0; }
-    p + p { margin-top: 1rem; }
-    a { color: #f4f1ea; }
+    :root { --bg: #f7f8fa; --card: #fff; --text: #1c2733; --muted: #5d6b7a; --line: #dde3ea; --navy: #0f1b2d; --accent: #1f5fbf; --bad: #b71c1c; --good: #2e7d32; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--accent); }
+    .wrap { max-width: 60rem; margin: 0 auto; padding: 0 1rem; }
+    header { background: var(--navy); color: #fff; }
+    header .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding-top: .75rem; padding-bottom: .75rem; }
+    .brand { font-weight: 700; font-size: 1.15rem; color: #fff; text-decoration: none; }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: 0; padding: 0; }
+    nav a { color: #dbe6f7; text-decoration: none; padding: .35rem 0; display: inline-block; }
+    nav a:hover, nav a:focus-visible { color: #fff; text-decoration: underline; }
+    .hero { background: var(--navy); color: #fff; padding: 2rem 0 2.5rem; }
+    .hero .wrap { display: grid; gap: 1.5rem; grid-template-columns: 1.1fr 1fr; align-items: center; }
+    @media (max-width: 42rem) { .hero .wrap { grid-template-columns: 1fr; } }
+    h1 { font-size: clamp(1.9rem, 6vw, 2.75rem); line-height: 1.15; margin: 0 0 1rem; }
+    .hero p { font-size: 1.1rem; margin: 0 0 1.25rem; color: #dbe6f7; }
+    .hero img { width: 100%; height: auto; border-radius: .6rem; display: block; }
+    .btn { display: inline-block; background: #f6c453; color: #1c2733; font-weight: 700; text-decoration: none; padding: .7rem 1.2rem; border-radius: .4rem; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+    .btn:hover, .btn:focus-visible { filter: brightness(1.05); outline: 2px solid #fff; outline-offset: 2px; }
+    section.block { padding: 2.5rem 0; }
+    h2 { font-size: 1.6rem; margin: 0 0 1.25rem; }
+    .cards { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 42rem) { .cards { grid-template-columns: 1fr; } }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: 1.25rem; }
+    .card img { width: 3rem; height: 3rem; display: block; margin-bottom: .5rem; }
+    .card h3 { margin: 0 0 .4rem; font-size: 1.15rem; }
+    .card p { margin: 0; color: var(--muted); }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: .85rem 1rem; margin-bottom: .6rem; }
+    summary { font-weight: 600; cursor: pointer; }
+    details p { margin: .6rem 0 0; color: var(--muted); }
+    form { background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: 1.25rem; max-width: 36rem; }
+    label { display: block; font-weight: 600; margin-bottom: 1rem; }
+    input, select, textarea { display: block; width: 100%; margin-top: .3rem; padding: .6rem .7rem; font: inherit; border: 1px solid #b8c2cf; border-radius: .35rem; background: #fff; color: var(--text); }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+    [aria-invalid="true"] { border-color: var(--bad); }
+    .err { display: block; color: var(--bad); font-weight: 400; font-size: .9rem; min-height: 1.1em; margin-top: .25rem; }
+    #formStatus { margin: 1rem 0 0; font-weight: 600; }
+    #formStatus.ok { color: var(--good); } #formStatus.bad { color: var(--bad); }
+    footer { background: var(--navy); color: #b9c4d3; padding: 1.5rem 0; font-size: .9rem; }
+    footer a { color: #dbe6f7; }
   </style>
 </head>
 <body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="index.html">Northlight Studio</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="helpdesk.html">Help Desk</a></li>
+          <li><a href="troubleshoot.html">Troubleshoot</a></li>
+          <li><a href="staff.html">Staff</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <h1>Northlight Studio</h1>
-    <p>We are a design studio of 25 people, crafting clear, thoughtful brands, products and experiences for clients who want to stand out.</p>
-    <p><a href="helpdesk.html">Open the Help Desk</a></p>
-    <p><a href="troubleshoot.html">No internet? Troubleshoot it</a></p>
-    <p><a href="staff.html">Staff access (learning model)</a></p>
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <h1>Design that makes your work stand out</h1>
+          <p>Northlight Studio is a design studio of 25 people. We craft clear, thoughtful brands, products and experiences.</p>
+          <a class="btn" href="#contact">Start a project</a>
+        </div>
+        <img src="assets/hero.svg" width="640" height="320" alt="Illustration of a sun rising behind blue mountains, representing the Northlight Studio brand">
+      </div>
+    </div>
+
+    <section class="block" id="services" aria-labelledby="services-h">
+      <div class="wrap">
+        <h2 id="services-h">What we do</h2>
+        <div class="cards">
+          <article class="card">
+            <img src="assets/icon-brand.svg" width="48" height="48" alt="Triangle icon for brand identity">
+            <h3>Brand identity</h3>
+            <p>Names, logos and visual systems that make a company easy to recognise and remember.</p>
+          </article>
+          <article class="card">
+            <img src="assets/icon-ui.svg" width="48" height="48" alt="Screen icon for web and product design">
+            <h3>Web and product design</h3>
+            <p>Websites and apps that are simple to use, accessible and fast on every device.</p>
+          </article>
+          <article class="card">
+            <img src="assets/icon-workshop.svg" width="48" height="48" alt="Two people icon for design workshops">
+            <h3>Design workshops</h3>
+            <p>Hands-on sessions that help your team agree on a direction before design starts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="faq" aria-labelledby="faq-h" style="padding-top:0">
+      <div class="wrap">
+        <h2 id="faq-h">Frequently asked questions</h2>
+        <details>
+          <summary>What does Northlight Studio do?</summary>
+          <p>Northlight Studio is a 25-person design studio. We create brand identities, web and product design, and design workshops for clients who want to stand out.</p>
+        </details>
+        <details>
+          <summary>How big is the team?</summary>
+          <p>Our team has 25 people, including brand designers, product designers and project leads.</p>
+        </details>
+        <details>
+          <summary>How long does a project take?</summary>
+          <p>Most projects take between 4 and 12 weeks, depending on scope. We agree a timeline with you before we start.</p>
+        </details>
+        <details>
+          <summary>How do I start a project?</summary>
+          <p>Send us a message with the contact form on this page. We reply with next steps, and your enquiry is logged as a ticket so it does not get lost.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="block" id="contact" aria-labelledby="contact-h" style="padding-top:0">
+      <div class="wrap">
+        <h2 id="contact-h">Contact us</h2>
+        <form id="contactForm" novalidate>
+          <label for="cName">Your name
+            <input id="cName" name="name" autocomplete="name" maxlength="80" aria-describedby="cNameErr">
+            <span class="err" id="cNameErr"></span></label>
+          <label for="cEmail">Email address
+            <input id="cEmail" name="email" type="email" autocomplete="email" inputmode="email" maxlength="120" aria-describedby="cEmailErr">
+            <span class="err" id="cEmailErr"></span></label>
+          <label for="cTopic">What is it about?
+            <select id="cTopic" name="topic">
+              <option>General question</option>
+              <option>Brand identity</option>
+              <option>Web and product design</option>
+              <option>Design workshop</option>
+            </select></label>
+          <label for="cUrgency">When do you need an answer?
+            <select id="cUrgency" name="urgency">
+              <option value="Low">No rush</option>
+              <option value="Medium">This week</option>
+              <option value="High">Urgent</option>
+            </select></label>
+          <label for="cMessage">Message
+            <textarea id="cMessage" name="message" rows="5" maxlength="350" aria-describedby="cMessageErr"></textarea>
+            <span class="err" id="cMessageErr"></span></label>
+          <button class="btn" type="submit">Send message</button>
+          <p id="formStatus" role="status" tabindex="-1"></p>
+        </form>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="wrap">Northlight Studio. Demo site with fake data. <a href="helpdesk.html">Help Desk</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+      // Writes into the same storage the Help Desk page reads (helpdesk.js, key v2).
+      const KEY = 'helpdesk.tickets.v2';
+      const ID_FLOOR = 1005; // the demo tickets use HD-1001..1005, so new ids start above them
+      const $ = id => document.getElementById(id);
+      const form = $('contactForm');
+
+      function loadTickets() {
+        const v = JSON.parse(localStorage.getItem(KEY) || '[]');
+        return Array.isArray(v) ? v : [];
+      }
+      function nextId(tickets) {
+        let max = ID_FLOOR;
+        tickets.forEach(t => { const n = parseInt(String(t.id).replace(/\D/g, ''), 10); if (n > max) max = n; });
+        return 'HD-' + (max + 1);
+      }
+
+      const checks = [
+        ['name', 'cName', 'cNameErr', v => v ? '' : 'Please enter your name.'],
+        ['email', 'cEmail', 'cEmailErr', v => !v ? 'Please enter your email address.'
+          : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'That email address does not look right. Use the form name@example.com.'],
+        ['message', 'cMessage', 'cMessageErr', v => v.length >= 10 ? '' : 'Please write at least 10 characters about how we can help.']
+      ];
+
+      function status(msg, ok) { const s = $('formStatus'); s.textContent = msg; s.className = ok ? 'ok' : 'bad'; }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        let firstBad = null;
+        checks.forEach(([name, inputId, errId, rule]) => {
+          const input = $(inputId);
+          const msg = rule(form.elements[name].value.trim());
+          $(errId).textContent = msg;
+          if (msg) { input.setAttribute('aria-invalid', 'true'); if (!firstBad) firstBad = input; }
+          else input.removeAttribute('aria-invalid');
+        });
+        if (firstBad) { status('Please fix the highlighted fields and send again.', false); firstBad.focus(); return; }
+
+        const name = form.elements.name.value.trim();
+        const email = form.elements.email.value.trim();
+        const topic = form.elements.topic.value;
+        const message = form.elements.message.value.trim();
+        try {
+          const tickets = loadTickets();
+          const ticket = {
+            id: nextId(tickets),
+            requester: name,
+            issue: ('Website enquiry (' + topic + ') from ' + email + ': ' + message).slice(0, 500),
+            impact: 'Low',
+            urgency: form.elements.urgency.value,
+            status: 'New',
+            created: new Date().toISOString()
+          };
+          tickets.push(ticket);
+          localStorage.setItem(KEY, JSON.stringify(tickets));
+          form.reset();
+          status('Thank you, ' + name + '. Your message is ticket ' + ticket.id + '. We will reply to ' + email + '.', true);
+          $('formStatus').focus();
+        } catch (err) {
+          status('Sorry, we could not save your message in this browser (storage may be blocked). Please try again or use another browser.', false);
+        }
+      });
+
+      // Clear an error as soon as the person starts fixing the field.
+      checks.forEach(([, inputId, errId]) => $(inputId).addEventListener('input', () => { $(errId).textContent = ''; $(inputId).removeAttribute('aria-invalid'); }));
+    })();
+  </script>
 </body>
 </html>

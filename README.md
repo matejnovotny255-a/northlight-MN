@@ -52,3 +52,10 @@ Each check prints PASS or FAIL (or SKIP when it cannot be read). Many routers ig
 - Step 2: a 6-digit time-based one-time code (TOTP, RFC 6238). A code cannot be used twice.
 - Five wrong attempts lock the account for 30 seconds.
 - Web Crypto needs https or localhost, so open it through GitHub Pages or `python -m http.server`.
+
+## Home page, SEO and the contact form
+
+`index.html` is the Northlight Studio home page: header links to every page, three services, a four-question FAQ and a contact form. All content is fake demo data and the page loads no outside scripts (a Content-Security-Policy meta tag enforces this).
+
+- **SEO and GEO basics:** a title under 60 characters, a description under 155, one H1, alt text on every image, canonical and Open Graph tags, `Organization` and `FAQPage` JSON-LD, `robots.txt` and `sitemap.xml`. The FAQ JSON-LD must stay word-for-word identical to the visible FAQ; if you edit one, edit the other.
+- **Contact form:** each field shows a clear error message. A valid message creates a ticket in the Help Desk storage (`helpdesk.tickets.v2`, impact Low, urgency from the form, status New), so it appears on `helpdesk.html`. Website ticket numbers start at HD-1006, above the demo tickets.
