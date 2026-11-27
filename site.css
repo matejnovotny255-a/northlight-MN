@@ -201,3 +201,10 @@ td.empty { color: var(--muted); text-align: center; padding: 1.5rem; }
 @media (prefers-color-scheme: dark) { .badge.pr-Low, .badge.pr-Medium, .badge.pr-High, .badge.pr-Critical { color: #0b1220; } .badge.pr-Medium { background: var(--gold); } }
 .inline-form input, .inline-form select { height: 2.75rem; padding-top: 0; padding-bottom: 0; }
 .chart { max-width: 46rem; }
+
+/* ---------- Automation ---------- */
+.optional { font-weight: 400; color: var(--muted); }
+.pill.bad { background: var(--bad); }
+td { overflow-wrap: break-word; }
+.pill, .badge { white-space: nowrap; }
+.table-wrap td:first-child { white-space: nowrap; }

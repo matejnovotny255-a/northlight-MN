@@ -72,3 +72,15 @@ All four pages share one look: `site.css` holds the colours, header, footer, but
 - **Support cases** have a priority and a due time. The due time is suggested from the priority (Critical 4 h, High 8 h, Medium 24 h, Low 72 h) and must be in the future. An open case past its due time shows an Overdue label.
 - **Opportunities by stage** is a bar chart drawn with plain SVG (no libraries) with counts and amounts, and a text description for screen readers.
 - Seed data: three fake leads and one open case, created once. "Reset sample data" restores them.
+
+## Automation
+
+`rules.json` holds automation rules as plain data, and `automation.js` runs them. When the website contact form on `index.html` is sent, the rules run in order:
+
+1. **R1** creates a lead in the CRM storage (`crm.data.v1`).
+2. **R2** creates a ticket in the Help Desk storage (`helpdesk.tickets.v2`).
+3. **R3** runs only if the message contains the word "urgent" (a whole word, any case, so "URGENT!" matches but "urgently" does not). It sets the ticket to P1 and adds an alert to the outbox.
+
+`automation.html` shows the outbox, a log line for every rule that ran (ok, skipped with the reason, or error) and the rules as loaded from `rules.json`. **Nothing is really sent**: the outbox is simulated and all data is fake and stays in the browser.
+
+To change behaviour, edit `rules.json`. Supported actions are `create_crm_lead`, `create_ticket`, `set_ticket_priority` and `add_outbox_alert`; conditions are `containsWord` and `equals`. If `rules.json` cannot be loaded (for example when a page is opened as a file instead of over http), the form falls back to creating the lead and ticket only, and logs a warning, so a message is never lost.

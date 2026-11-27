@@ -52,6 +52,7 @@
           <li><a href="index.html#contact">Contact</a></li>
           <li><a href="crm.html">CRM</a></li>
           <li><a href="helpdesk.html">Help Desk</a></li>
+          <li><a href="automation.html">Automation</a></li>
           <li><a href="troubleshoot.html">Troubleshoot</a></li>
           <li><a href="staff.html">Staff</a></li>
         </ul>
@@ -140,6 +141,8 @@
           <label for="cEmail">Email address
             <input id="cEmail" name="email" type="email" autocomplete="email" inputmode="email" maxlength="120" aria-describedby="cEmailErr">
             <span class="err" id="cEmailErr"></span></label>
+          <label for="cCompany">Company <span class="optional">(optional)</span>
+            <input id="cCompany" name="company" autocomplete="organization" maxlength="80"></label>
           <label for="cTopic">What is it about?
             <select id="cTopic" name="topic">
               <option>General question</option>
@@ -167,28 +170,17 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>Northlight Studio. A demo site with fake data.</span>
-      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
+      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
     </div>
   </footer>
 
+  <script src="automation.js"></script>
   <script>
     (function () {
       'use strict';
-      // Writes into the same storage the Help Desk page reads (helpdesk.js, key v2).
-      const KEY = 'helpdesk.tickets.v2';
-      const ID_FLOOR = 1005; // the demo tickets use HD-1001..1005, so new ids start above them
+      // The form only validates and hands the message to the rules in rules.json (see automation.js).
       const $ = id => document.getElementById(id);
       const form = $('contactForm');
-
-      function loadTickets() {
-        const v = JSON.parse(localStorage.getItem(KEY) || '[]');
-        return Array.isArray(v) ? v : [];
-      }
-      function nextId(tickets) {
-        let max = ID_FLOOR;
-        tickets.forEach(t => { const n = parseInt(String(t.id).replace(/\D/g, ''), 10); if (n > max) max = n; });
-        return 'HD-' + (max + 1);
-      }
 
       const checks = [
         ['name', 'cName', 'cNameErr', v => v ? '' : 'Please enter your name.'],
@@ -199,7 +191,7 @@
 
       function status(msg, ok) { const s = $('formStatus'); s.textContent = msg; s.className = ok ? 'ok' : 'bad'; }
 
-      form.addEventListener('submit', function (e) {
+      form.addEventListener('submit', async function (e) {
         e.preventDefault();
         let firstBad = null;
         checks.forEach(([name, inputId, errId, rule]) => {
@@ -211,29 +203,21 @@
         });
         if (firstBad) { status('Please fix the highlighted fields and send again.', false); firstBad.focus(); return; }
 
-        const name = form.elements.name.value.trim();
-        const email = form.elements.email.value.trim();
-        const topic = form.elements.topic.value;
-        const message = form.elements.message.value.trim();
+        const payload = {
+          name: form.elements.name.value, email: form.elements.email.value, company: form.elements.company.value,
+          topic: form.elements.topic.value, urgency: form.elements.urgency.value, message: form.elements.message.value
+        };
+        const button = form.querySelector('button[type=submit]'); button.disabled = true;
         try {
-          const tickets = loadTickets();
-          const ticket = {
-            id: nextId(tickets),
-            requester: name,
-            issue: ('Website enquiry (' + topic + ') from ' + email + ': ' + message).slice(0, 500),
-            impact: 'Low',
-            urgency: form.elements.urgency.value,
-            status: 'New',
-            created: new Date().toISOString()
-          };
-          tickets.push(ticket);
-          localStorage.setItem(KEY, JSON.stringify(tickets));
+          const r = await Automation.run('contact_form_submitted', payload);
+          if (!r.ticket) throw new Error('no ticket created');
           form.reset();
-          status('Thank you, ' + name + '. Your message is ticket ' + ticket.id + '. We will reply to ' + email + '.', true);
+          const p1 = r.ticket.impact === 'High' && r.ticket.urgency === 'High';
+          status('Thank you, ' + payload.name.trim() + '. Your message is ticket ' + r.ticket.id + (p1 ? ' and we have flagged it as urgent' : '') + '. We will reply to ' + payload.email.trim() + '.', true);
           $('formStatus').focus();
         } catch (err) {
           status('Sorry, we could not save your message in this browser (storage may be blocked). Please try again or use another browser.', false);
-        }
+        } finally { button.disabled = false; }
       });
 
       // Clear an error as soon as the person starts fixing the field.

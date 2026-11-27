@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Automation | Northlight Studio</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="crm.html">CRM</a></li>
+          <li><a href="helpdesk.html">Help Desk</a></li>
+          <li><a href="automation.html" aria-current="page">Automation</a></li>
+          <li><a href="troubleshoot.html">Troubleshoot</a></li>
+          <li><a href="staff.html">Staff</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Automation</h1>
+      <p>When the website contact form is sent, the rules in <code>rules.json</code> run. This page shows the outbox and a log of every rule that ran.</p>
+    </div>
+  </div>
+  <div class="notice" role="note">Nothing is really sent. Alerts only appear in this simulated outbox, and all data is fake and stored in your browser.</div>
+
+  <main class="wrap page-body">
+    <section aria-labelledby="out-h">
+      <div class="row" style="justify-content: space-between">
+        <h2 id="out-h" style="margin:0">Outbox (<span id="outCount">0</span>)</h2>
+        <button type="button" class="secondary small" id="clearOutbox">Clear outbox</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Time</th><th>To</th><th>Subject</th><th>Message</th><th>Status</th></tr></thead><tbody id="outboxBody"></tbody></table></div>
+    </section>
+
+    <section aria-labelledby="log-h">
+      <div class="row" style="justify-content: space-between">
+        <h2 id="log-h" style="margin:0">Rule log (<span id="logCount">0</span>)</h2>
+        <button type="button" class="secondary small" id="clearLog">Clear log</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Time</th><th>Rule</th><th>Result</th><th>Details</th></tr></thead><tbody id="logBody"></tbody></table></div>
+    </section>
+
+    <section aria-labelledby="rules-h">
+      <h2 id="rules-h">Rules (read from rules.json)</h2>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Event</th><th>Condition</th><th>Actions</th><th>Enabled</th></tr></thead><tbody id="rulesBody"></tbody></table></div>
+    </section>
+
+    <section aria-labelledby="try-h">
+      <h2 id="try-h">Try the rules</h2>
+      <p class="hint">Runs the same rules as the contact form with a fake person. Include the word <strong>urgent</strong> to see the P1 ticket and the alert.</p>
+      <form id="tryForm" class="row" novalidate>
+        <label style="flex:1;min-width:14rem;margin:0">Test message <input id="tryMessage" maxlength="300" autocomplete="off"></label>
+        <button type="submit">Run rules</button>
+      </form>
+      <p class="msg" id="tryStatus" role="status"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Northlight Studio. A demo site with fake data.</span>
+      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
+    </div>
+  </footer>
+
+  <script src="automation.js"></script>
+</body>
+</html>

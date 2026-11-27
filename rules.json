@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "description": "Automation rules for the website contact form. Rules run in order. Nothing is really sent: alerts only go to the simulated outbox.",
+  "rules": [
+    {
+      "id": "R1",
+      "name": "Create a CRM lead",
+      "event": "contact_form_submitted",
+      "enabled": true,
+      "actions": [
+        { "type": "create_crm_lead" }
+      ]
+    },
+    {
+      "id": "R2",
+      "name": "Create a help desk ticket",
+      "event": "contact_form_submitted",
+      "enabled": true,
+      "actions": [
+        { "type": "create_ticket" }
+      ]
+    },
+    {
+      "id": "R3",
+      "name": "Urgent message: make ticket P1 and alert on-call",
+      "event": "contact_form_submitted",
+      "enabled": true,
+      "if": { "field": "message", "containsWord": "urgent" },
+      "actions": [
+        { "type": "set_ticket_priority", "priority": "P1" },
+        {
+          "type": "add_outbox_alert",
+          "to": "oncall@example.com",
+          "subject": "URGENT: ticket {ticket.id} from {name}",
+          "body": "{name} ({email}) wrote about \"{topic}\": {message} (ticket {ticket.id}, CRM lead {lead.id})"
+        }
+      ]
+    }
+  ]
+}
