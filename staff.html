@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff Access</title>
+  <style>
+    :root { --bg: #f4f6f9; --card: #fff; --text: #1c2733; --muted: #5d6b7a; --line: #dde3ea; --accent: #1f5fbf; --bad: #b71c1c; --good: #2e7d32; --warn: #fff4d6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    header { background: #0f1b2d; color: #fff; padding: 1.25rem 1rem; }
+    header h1 { margin: 0; font-size: 1.5rem; }
+    header p { margin: .25rem 0 0; color: #b9c4d3; }
+    header a { color: #fff; }
+    .notice { background: var(--warn); border-bottom: 2px solid #e0b84a; padding: .75rem 1rem; text-align: center; font-weight: 600; }
+    main { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1rem; display: grid; gap: 1.25rem; }
+    .grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr 1fr; align-items: start; }
+    @media (max-width: 52rem) { .grid { grid-template-columns: 1fr; } }
+    section { background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: 1.25rem; }
+    section[hidden], form[hidden], div[hidden] { display: none; }
+    h2 { margin: 0 0 1rem; font-size: 1.15rem; }
+    h3 { margin: 1.25rem 0 .5rem; font-size: 1rem; }
+    label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: .75rem; }
+    input, select { display: block; width: 100%; margin-top: .3rem; padding: .55rem .6rem; font: inherit; border: 1px solid var(--line); border-radius: .35rem; background: #fff; }
+    input:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); }
+    button { font: inherit; font-weight: 600; background: var(--accent); color: #fff; border: 0; border-radius: .35rem; padding: .6rem 1rem; cursor: pointer; }
+    button.secondary { background: #fff; color: var(--text); border: 1px solid var(--line); }
+    button.small { padding: .25rem .6rem; font-size: .8rem; }
+    button.danger { background: var(--bad); }
+    .row { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+    .msg { min-height: 1.2em; font-size: .9rem; margin: .5rem 0 0; }
+    .msg.bad { color: var(--bad); } .msg.good { color: var(--good); }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    th, td { text-align: left; padding: .4rem .5rem; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; }
+    tr.left td { color: var(--muted); }
+    .pill { padding: .1rem .5rem; border-radius: 99px; font-size: .75rem; font-weight: 700; color: #fff; background: var(--good); }
+    .pill.Leaver { background: var(--muted); }
+    .code { font-family: ui-monospace, monospace; font-size: 1.6rem; letter-spacing: .15rem; }
+    code { background: #eef2f7; padding: .1rem .35rem; border-radius: .25rem; }
+    #joinerResult { background: #eef7ee; border: 1px solid #b7d9b7; border-radius: .4rem; padding: .75rem; margin-top: .75rem; display: grid; gap: .3rem; }
+    ul#log { margin: 0; padding-left: 1.1rem; font-size: .85rem; color: var(--muted); }
+    .hint { color: var(--muted); font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Staff Access</h1>
+    <p>Passwords, two-step sign-in, groups and roles. <a href="index.html">Back to Northlight Studio</a></p>
+  </header>
+  <div class="notice" role="note">Learning model only. All people, passwords and secrets here are fake and stored in your browser. Never use real credentials on this page.</div>
+
+  <main>
+    <p id="fatal" class="msg bad" hidden>This page needs the browser's Web Crypto API, which only works on https:// or localhost.</p>
+
+    <div class="grid" id="signin">
+      <section aria-labelledby="si-h">
+        <h2 id="si-h">Sign in</h2>
+        <form id="step1" novalidate>
+          <p class="hint">Step 1 of 2: password</p>
+          <label>Username <input id="username" autocomplete="username" autocapitalize="none"></label>
+          <label>Password <input id="password" type="password" autocomplete="current-password"></label>
+          <button type="submit">Continue</button>
+          <p class="msg" id="msg1" role="status"></p>
+        </form>
+        <form id="step2" hidden novalidate>
+          <p class="hint">Step 2 of 2: one-time code</p>
+          <label>6-digit code <input id="code" inputmode="numeric" maxlength="6" autocomplete="one-time-code"></label>
+          <div class="row"><button type="submit">Sign in</button><button type="button" class="secondary" id="back">Back</button></div>
+          <p class="msg" id="msg2" role="status"></p>
+        </form>
+      </section>
+
+      <section aria-labelledby="demo-h">
+        <h2 id="demo-h">Demo helper</h2>
+        <p class="hint">Fake accounts to try. In real life the password is secret and the code comes from the person's phone.</p>
+        <table><thead><tr><th>Username</th><th>Password</th><th>Group / role</th></tr></thead><tbody id="demoBody"></tbody></table>
+        <h3>Demo authenticator (pretend phone)</h3>
+        <label>Show code for <select id="authUser"></select></label>
+        <div class="row"><span class="code" id="authCode">------</span><span class="hint" id="authLeft"></span></div>
+      </section>
+    </div>
+
+    <div id="app" hidden>
+      <section aria-labelledby="app-h">
+        <div class="row" style="justify-content: space-between">
+          <div><h2 id="app-h" style="margin:0">Welcome, <span id="who"></span></h2><span class="hint" id="whoMeta"></span></div>
+          <div class="row"><button type="button" id="openAdmin">Admin section</button><button type="button" class="secondary" id="signout">Sign out</button></div>
+        </div>
+        <p class="msg bad" id="adminDenied" role="alert"></p>
+        <h3>Colleagues</h3>
+        <table><thead><tr><th>Name</th><th>Group</th><th>Role</th></tr></thead><tbody id="dir"></tbody></table>
+      </section>
+
+      <section id="admin" hidden aria-labelledby="ad-h" style="margin-top:1.25rem">
+        <h2 id="ad-h">Admin section (IT only)</h2>
+        <table><thead><tr><th>User</th><th>Name</th><th>Group</th><th>Role</th><th>Status</th><th></th></tr></thead><tbody id="adminBody"></tbody></table>
+        <h3>Joiner</h3>
+        <form id="joiner" class="row" novalidate>
+          <label style="flex:2;min-width:10rem">Full name <input id="jName" maxlength="60" autocomplete="off"></label>
+          <label style="flex:1;min-width:8rem">Group <select id="jGroup"></select></label>
+          <label style="flex:1;min-width:10rem">Role <select id="jRole"></select></label>
+          <button type="submit">Add joiner</button>
+        </form>
+        <div id="joinerResult" hidden></div>
+        <p class="msg" id="adminMsg" role="status"></p>
+        <h3>Recent activity</h3>
+        <ul id="log"></ul>
+      </section>
+    </div>
+
+    <p class="hint">Data lives only in this browser (localStorage). <button type="button" class="secondary small" id="reset">Reset demo data</button></p>
+  </main>
+
+  <script src="staff.js"></script>
+</body>
+</html>

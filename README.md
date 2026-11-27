@@ -43,3 +43,12 @@ node --test tools                  # run the tests (they use fake command output
 Each check prints PASS or FAIL (or SKIP when it cannot be read). Many routers ignore ping, so the router check also tries a TCP connection and does not blame the router when the internet works through it.
 
 `troubleshoot.html` is a click-through "no internet" decision tree.
+
+## Staff access (learning model)
+
+`staff.html` and `staff.js` model a small staff directory: six fake users in Design, Sales and IT, two-step sign-in, an IT-only admin section with Joiner and Leaver buttons, and a leaver who cannot sign in. Everything is fake and lives in the browser's localStorage, so it is a learning model and not real security.
+
+- Step 1: password, hashed with PBKDF2 (SHA-256, per-user salt) using the Web Crypto API.
+- Step 2: a 6-digit time-based one-time code (TOTP, RFC 6238). A code cannot be used twice.
+- Five wrong attempts lock the account for 30 seconds.
+- Web Crypto needs https or localhost, so open it through GitHub Pages or `python -m http.server`.
