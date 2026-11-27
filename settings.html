@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings | Northlight Studio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li class="menu">
+            <details class="menu-d">
+              <summary class="is-active">Tools</summary>
+            <ul>
+              <li><a href="crm.html">CRM</a></li>
+              <li><a href="helpdesk.html">Help Desk</a></li>
+              <li><a href="automation.html">Automation</a></li>
+              <li><a href="troubleshoot.html">Troubleshoot</a></li>
+              <li><a href="staff.html">Staff</a></li>
+              <li><a href="settings.html" aria-current="page">Settings</a></li>
+            </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Settings and data</h1>
+      <p>Site information, settings and a full export of the data saved in this browser.</p>
+    </div>
+  </div>
+
+  <main class="wrap page-body" id="main">
+    <div class="grid">
+      <section aria-labelledby="about-h">
+        <h2 id="about-h">About this site</h2>
+        <p class="hint">Read from <code>health.json</code>. The deploy workflow stamps the real build date and commit.</p>
+        <table class="kv"><tbody id="aboutBody"></tbody></table>
+      </section>
+      <section aria-labelledby="cfg-h">
+        <h2 id="cfg-h">Settings</h2>
+        <p class="hint">Read from <code>config.js</code>. Edit that file to change them.</p>
+        <table class="kv"><tbody id="configBody"></tbody></table>
+      </section>
+    </div>
+
+    <section aria-labelledby="data-h">
+      <div class="row" style="justify-content: space-between">
+        <h2 id="data-h" style="margin:0">Your data (<span id="recordCount">0</span> records)</h2>
+        <button type="button" id="exportBtn">Export all data</button>
+      </div>
+      <p class="hint" style="margin-top:.75rem">Downloads every record saved in this browser for this site as one JSON file. It is demo data only and includes fake demo password hashes and secrets.</p>
+      <p class="msg" id="exportStatus" role="status"></p>
+      <div class="table-wrap"><table><thead><tr><th>Record</th><th>Contents</th><th>Size</th></tr></thead><tbody id="dataBody"></tbody></table></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Northlight Studio. A demo site with fake data.</span>
+      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff</a> · <a href="settings.html">Settings</a></span>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="settings.js"></script>
+  <script src="site.js"></script>
+</body>
+</html>

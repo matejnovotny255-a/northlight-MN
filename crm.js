@@ -128,7 +128,8 @@
   // ---------- UI ----------
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
-  const money = n => new Intl.NumberFormat(undefined, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n || 0);
+  const cfg = window.NorthlightConfig || {};  // settings from config.js (locale, currency)
+  const money = n => new Intl.NumberFormat(cfg.locale || undefined, { style: 'currency', currency: cfg.currency || 'EUR', maximumFractionDigits: 0 }).format(n || 0);
   const when = iso => new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
   const SVGNS = 'http://www.w3.org/2000/svg';
   const svg = (tag, attrs, text) => { const e = document.createElementNS(SVGNS, tag); Object.entries(attrs || {}).forEach(([k, v]) => e.setAttribute(k, v)); if (text != null) e.textContent = text; return e; };

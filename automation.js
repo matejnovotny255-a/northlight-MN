@@ -115,7 +115,7 @@
       const item = {
         id: 'OB-' + String(nextNumber(out)).padStart(3, '0'),
         at: nowIso(),
-        to: params.to || 'oncall@example.com',
+        to: params.to || (window.NorthlightConfig && window.NorthlightConfig.alertRecipient) || 'oncall@example.com', // default comes from config.js
         subject: fill(params.subject, ctx),
         body: fill(params.body, ctx),
         status: 'Simulated, not sent',

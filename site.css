@@ -208,3 +208,25 @@ td.empty { color: var(--muted); text-align: center; padding: 1.5rem; }
 td { overflow-wrap: break-word; }
 .pill, .badge { white-space: nowrap; }
 .table-wrap td:first-child { white-space: nowrap; }
+
+/* ---------- Navigation menu, skip link, key/value tables ---------- */
+.skip { position: absolute; left: .75rem; top: -4rem; z-index: 20; background: var(--btn-bg); color: var(--btn-ink); padding: .6rem 1rem; border-radius: 10px; font-weight: 600; text-decoration: none; }
+.skip:focus { top: .75rem; }
+.site-header .menu { position: relative; }
+.site-header details.menu-d { border: 0; padding: 0; background: none; }
+.site-header .menu summary { font-family: var(--sans); font-size: .95rem; font-weight: 500; color: var(--muted); padding: .45rem 0; border-bottom: 2px solid transparent; display: inline-flex; gap: .35rem; align-items: center; cursor: pointer; }
+.site-header .menu summary::after { content: "\25BE"; font-size: .8rem; color: var(--gold-deep); }
+.site-header details[open] summary::after { content: "\25B4"; }
+.site-header .menu summary:hover, .site-header .menu details[open] summary { color: var(--ink); border-bottom-color: var(--line-strong); }
+.site-header .menu summary.is-active { color: var(--ink); border-bottom-color: var(--gold); }
+.site-header .menu details > ul { position: absolute; right: 0; top: calc(100% + .35rem); z-index: 15; min-width: 12.5rem; display: block; padding: .4rem; margin: 0; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+.site-header .menu details > ul a { display: block; padding: .5rem .8rem; border-radius: 8px; border-bottom: 0; color: var(--text); font-size: .93rem; }
+.site-header .menu details > ul a:hover { background: var(--surface-2); color: var(--ink); }
+.site-header .menu details > ul a[aria-current="page"] { background: var(--surface-2); color: var(--ink); font-weight: 600; box-shadow: inset 3px 0 0 var(--gold); }
+@media (max-width: 40rem) {
+  .site-header .menu { flex-basis: 100%; }
+  .site-header .menu details > ul { position: static; box-shadow: none; border: 0; padding: .25rem 0 0; background: transparent; display: flex; flex-wrap: wrap; gap: 0 .5rem; }
+  .site-header .menu details > ul a { padding: .4rem .7rem; background: var(--surface-2); margin-bottom: .35rem; }
+}
+table.kv th { width: 9rem; text-transform: none; letter-spacing: 0; font-size: .9rem; color: var(--muted); font-weight: 600; }
+table.kv td { font-weight: 500; }

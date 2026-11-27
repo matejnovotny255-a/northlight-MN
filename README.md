@@ -16,7 +16,7 @@ Then visit http://localhost:8000.
 
 ## Deployment
 
-Every push to `main` triggers the GitHub Actions workflow in `.github/workflows/deploy.yml`, which publishes the repository contents to GitHub Pages.
+Every push to `main` triggers the GitHub Actions workflow in `.github/workflows/deploy.yml`. A `check` job runs first (`node tools/check-cloud.js` and `node --test tools`); only if it passes does the `deploy` job stamp the real build date and commit into `health.json` and publish the repository contents to GitHub Pages. A bad cloud design file therefore blocks the release.
 
 One-time setup: in the repository on GitHub, go to **Settings > Pages** and set **Source** to **GitHub Actions**.
 
@@ -84,3 +84,21 @@ All four pages share one look: `site.css` holds the colours, header, footer, but
 `automation.html` shows the outbox, a log line for every rule that ran (ok, skipped with the reason, or error) and the rules as loaded from `rules.json`. **Nothing is really sent**: the outbox is simulated and all data is fake and stays in the browser.
 
 To change behaviour, edit `rules.json`. Supported actions are `create_crm_lead`, `create_ticket`, `set_ticket_priority` and `add_outbox_alert`; conditions are `containsWord` and `equals`. If `rules.json` cannot be loaded (for example when a page is opened as a file instead of over http), the form falls back to creating the lead and ticket only, and logs a warning, so a message is never lost.
+
+## Settings, health and data export
+
+- `health.json` holds the site name, version, build date and commit. The deploy workflow stamps the real build date and commit when it publishes. Bump `version` by hand when you release.
+- `config.js` holds the settings (`siteName`, `locale`, `currency`, `alertRecipient`, `healthUrl`, `exportFilePrefix`). The CRM uses `locale` and `currency`, and automation uses `alertRecipient` as the default alert address. It is public, so never put secrets in it.
+- `settings.html` shows the site info, the settings and every record saved in the browser. **Export all data** downloads every localStorage record as one JSON file (`northlight-export-YYYY-MM-DD-HHMM.json`) with the site version and a note that it is demo data only. The file includes fake demo password hashes and secrets from the Staff page, so do not treat it as real data.
+
+## Cloud design and checker
+
+`northlight.cloud.json` describes a resource group, a web app and a storage account with names and tags (`owner`, `env`, `cost-center`). It is a design only: nothing is deployed from it.
+
+```sh
+node tools/check-cloud.js            # prints PASS or FAIL per resource, exits 1 on any failure
+node tools/check-cloud.js other.json # check another file
+node --test tools                    # includes tests with fake, deliberately broken designs
+```
+
+The checker is read-only and fails on a missing or empty tag, a bad tag value (`owner` must be an email, `env` one of dev, test, prod, `cost-center` like `CC-1234`), a bad name (`rg-<workload>-<env>-<region>`, `app-<workload>-<env>-<region>-<nnn>`, `st<workload><env><nnn>` with 3 to 24 lowercase letters and digits), an env in the name that differs from the env tag, a duplicate name or a missing resource group. The file may add required tags but can never remove the three built-in ones.

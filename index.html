@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0e1a2e">
   <title>Northlight Studio | 25-Person Design Studio</title>
   <meta name="description" content="Northlight Studio is a 25-person design studio creating brand identities, web and product design, and design workshops.">
   <link rel="canonical" href="https://matejnovotny255-a.github.io/northlight-MN/">
@@ -42,6 +44,7 @@
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
@@ -50,17 +53,25 @@
           <li><a href="index.html#services">Services</a></li>
           <li><a href="index.html#faq">FAQ</a></li>
           <li><a href="index.html#contact">Contact</a></li>
-          <li><a href="crm.html">CRM</a></li>
-          <li><a href="helpdesk.html">Help Desk</a></li>
-          <li><a href="automation.html">Automation</a></li>
-          <li><a href="troubleshoot.html">Troubleshoot</a></li>
-          <li><a href="staff.html">Staff</a></li>
+          <li class="menu">
+            <details class="menu-d">
+              <summary>Tools</summary>
+            <ul>
+              <li><a href="crm.html">CRM</a></li>
+              <li><a href="helpdesk.html">Help Desk</a></li>
+              <li><a href="automation.html">Automation</a></li>
+              <li><a href="troubleshoot.html">Troubleshoot</a></li>
+              <li><a href="staff.html">Staff</a></li>
+              <li><a href="settings.html">Settings</a></li>
+            </ul>
+            </details>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <div class="hero">
       <div class="wrap">
         <div>
@@ -170,9 +181,11 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>Northlight Studio. A demo site with fake data.</span>
-      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
+      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff</a> · <a href="settings.html">Settings</a></span>
     </div>
   </footer>
+
+  <script src="config.js"></script>
 
   <script src="automation.js"></script>
   <script>
@@ -224,5 +237,6 @@
       checks.forEach(([, inputId, errId]) => $(inputId).addEventListener('input', () => { $(errId).textContent = ''; $(inputId).removeAttribute('aria-invalid'); }));
     })();
   </script>
+  <script src="site.js"></script>
 </body>
 </html>

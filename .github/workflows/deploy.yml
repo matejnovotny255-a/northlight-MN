@@ -15,7 +15,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Runs first. If the cloud design breaks a naming or tagging rule (or a test fails),
+  # the deploy job below never starts, so nothing is published.
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check cloud design (names and tags)
+        run: node tools/check-cloud.js
+      - name: Run tool tests
+        run: node --test tools
+
   deploy:
+    needs: check
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -23,6 +38,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Stamp health.json with the real build date and commit
+        run: |
+          node -e "
+          const fs = require('fs');
+          const h = JSON.parse(fs.readFileSync('health.json', 'utf8'));
+          h.buildDate = new Date().toISOString();
+          h.commit = process.env.GITHUB_SHA.slice(0, 7);
+          fs.writeFileSync('health.json', JSON.stringify(h, null, 2) + '\n');
+          console.log(h);
+          "
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .

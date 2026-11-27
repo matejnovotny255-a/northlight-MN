@@ -30,7 +30,6 @@
         { "type": "set_ticket_priority", "priority": "P1" },
         {
           "type": "add_outbox_alert",
-          "to": "oncall@example.com",
           "subject": "URGENT: ticket {ticket.id} from {name}",
           "body": "{name} ({email}) wrote about \"{topic}\": {message} (ticket {ticket.id}, CRM lead {lead.id})"
         }

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "description": "Cloud design for Northlight Studio. Design only: nothing is deployed from this file. tools/check-cloud.js enforces the naming and tagging rules.",
+  "provider": "azure-style",
+  "requiredTags": ["owner", "env", "cost-center"],
+  "resourceGroup": {
+    "name": "rg-northlight-prod-weu",
+    "location": "westeurope",
+    "tags": { "owner": "design-ops@example.com", "env": "prod", "cost-center": "CC-1001" }
+  },
+  "resources": [
+    {
+      "type": "webApp",
+      "name": "app-northlight-prod-weu-001",
+      "sku": "B1",
+      "purpose": "Hosts the static Northlight Studio website",
+      "tags": { "owner": "design-ops@example.com", "env": "prod", "cost-center": "CC-1001" }
+    },
+    {
+      "type": "storageAccount",
+      "name": "stnorthlightprod001",
+      "sku": "Standard_LRS",
+      "purpose": "Stores exported data and static assets",
+      "tags": { "owner": "design-ops@example.com", "env": "prod", "cost-center": "CC-1001" }
+    }
+  ]
+}

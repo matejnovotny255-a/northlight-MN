@@ -3,10 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0e1a2e">
   <title>Automation | Northlight Studio</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap bar">
       <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
@@ -15,11 +18,19 @@
           <li><a href="index.html#services">Services</a></li>
           <li><a href="index.html#faq">FAQ</a></li>
           <li><a href="index.html#contact">Contact</a></li>
-          <li><a href="crm.html">CRM</a></li>
-          <li><a href="helpdesk.html">Help Desk</a></li>
-          <li><a href="automation.html" aria-current="page">Automation</a></li>
-          <li><a href="troubleshoot.html">Troubleshoot</a></li>
-          <li><a href="staff.html">Staff</a></li>
+          <li class="menu">
+            <details class="menu-d">
+              <summary class="is-active">Tools</summary>
+            <ul>
+              <li><a href="crm.html">CRM</a></li>
+              <li><a href="helpdesk.html">Help Desk</a></li>
+              <li><a href="automation.html" aria-current="page">Automation</a></li>
+              <li><a href="troubleshoot.html">Troubleshoot</a></li>
+              <li><a href="staff.html">Staff</a></li>
+              <li><a href="settings.html">Settings</a></li>
+            </ul>
+            </details>
+          </li>
         </ul>
       </nav>
     </div>
@@ -32,7 +43,7 @@
   </div>
   <div class="notice" role="note">Nothing is really sent. Alerts only appear in this simulated outbox, and all data is fake and stored in your browser.</div>
 
-  <main class="wrap page-body">
+  <main class="wrap page-body" id="main">
     <section aria-labelledby="out-h">
       <div class="row" style="justify-content: space-between">
         <h2 id="out-h" style="margin:0">Outbox (<span id="outCount">0</span>)</h2>
@@ -68,10 +79,13 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>Northlight Studio. A demo site with fake data.</span>
-      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
+      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff</a> · <a href="settings.html">Settings</a></span>
     </div>
   </footer>
 
+  <script src="config.js"></script>
+
   <script src="automation.js"></script>
+  <script src="site.js"></script>
 </body>
 </html>
