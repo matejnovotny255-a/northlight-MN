@@ -1,6 +1,6 @@
 'use strict';
 // Tests use fake command output only: nothing here touches the real system.
-// Run: node --test tools
+// Run: node --test tools/test/*.test.js
 const test = require('node:test');
 const assert = require('node:assert');
 const lib = require('../lib');

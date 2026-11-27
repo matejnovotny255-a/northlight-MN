@@ -16,7 +16,7 @@ Then visit http://localhost:8000.
 
 ## Deployment
 
-Every push to `main` triggers the GitHub Actions workflow in `.github/workflows/deploy.yml`. A `check` job runs first (`node tools/check-cloud.js` and `node --test tools`); only if it passes does the `deploy` job stamp the real build date and commit into `health.json` and publish the repository contents to GitHub Pages. A bad cloud design file therefore blocks the release.
+Every push to `main` triggers the GitHub Actions workflow in `.github/workflows/deploy.yml`. A `check` job runs first (`node tools/check-cloud.js` and `node --test tools/test/*.test.js`); only if it passes does the `deploy` job stamp the real build date and commit into `health.json` and publish the repository contents to GitHub Pages. A bad cloud design file therefore blocks the release.
 
 One-time setup: in the repository on GitHub, go to **Settings > Pages** and set **Source** to **GitHub Actions**.
 
@@ -37,7 +37,7 @@ Read-only Node.js scripts in `tools/` (Node 18.15 or newer, no dependencies). Th
 node tools/health-report.js        # OS, free disk space, firewall status, pending updates (Windows)
 node tools/network-doctor.js       # router, then 1.1.1.1, then a website name; names the first failing step
 node tools/network-doctor.js github.com   # use a different website name
-node --test tools                  # run the tests (they use fake command output)
+node --test tools/test/*.test.js                  # run the tests (they use fake command output)
 ```
 
 Each check prints PASS or FAIL (or SKIP when it cannot be read). Many routers ignore ping, so the router check also tries a TCP connection and does not blame the router when the internet works through it.
@@ -98,7 +98,7 @@ To change behaviour, edit `rules.json`. Supported actions are `create_crm_lead`,
 ```sh
 node tools/check-cloud.js            # prints PASS or FAIL per resource, exits 1 on any failure
 node tools/check-cloud.js other.json # check another file
-node --test tools                    # includes tests with fake, deliberately broken designs
+node --test tools/test/*.test.js                    # includes tests with fake, deliberately broken designs
 ```
 
 The checker is read-only and fails on a missing or empty tag, a bad tag value (`owner` must be an email, `env` one of dev, test, prod, `cost-center` like `CC-1234`), a bad name (`rg-<workload>-<env>-<region>`, `app-<workload>-<env>-<region>-<nnn>`, `st<workload><env><nnn>` with 3 to 24 lowercase letters and digits), an env in the name that differs from the env tag, a duplicate name or a missing resource group. The file may add required tags but can never remove the three built-in ones.

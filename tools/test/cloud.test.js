@@ -1,6 +1,6 @@
 'use strict';
 // Tests for tools/check-cloud.js using fake cloud designs. Nothing here touches the real file or the network.
-// Run: node --test tools
+// Run: node --test tools/test/*.test.js
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');

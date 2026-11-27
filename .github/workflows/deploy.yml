@@ -27,7 +27,7 @@ jobs:
       - name: Check cloud design (names and tags)
         run: node tools/check-cloud.js
       - name: Run tool tests
-        run: node --test tools
+        run: node --test tools/test/*.test.js
 
   deploy:
     needs: check
