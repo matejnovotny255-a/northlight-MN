@@ -27,7 +27,7 @@ One-time setup: in the repository on GitHub, go to **Settings > Pages** and set 
 
 ## Help Desk
 
-`helpdesk.html` (with `helpdesk.css` and `helpdesk.js`) is a small ticket tracker: priority P1 to P3, response targets, statuses and an Overdue label. Tickets are saved in the browser's localStorage and the demo data is fake.
+`helpdesk.html` (with `helpdesk.js`) is a small ticket tracker: priority P1 to P3, response targets, statuses and an Overdue label. Tickets are saved in the browser's localStorage and the demo data is fake.
 
 ## Diagnostic tools
 
@@ -60,9 +60,16 @@ Each check prints PASS or FAIL (or SKIP when it cannot be read). Many routers ig
 - **SEO and GEO basics:** a title under 60 characters, a description under 155, one H1, alt text on every image, canonical and Open Graph tags, `Organization` and `FAQPage` JSON-LD, `robots.txt` and `sitemap.xml`. The FAQ JSON-LD must stay word-for-word identical to the visible FAQ; if you edit one, edit the other.
 - **Contact form:** each field shows a clear error message. A valid message creates a ticket in the Help Desk storage (`helpdesk.tickets.v2`, impact Low, urgency from the form, status New), so it appears on `helpdesk.html`. Website ticket numbers start at HD-1006, above the demo tickets.
 
-## Design
+## Design: Northlight Console
 
-All four pages share one look: `site.css` holds the colours, header, footer, buttons, forms, tables and cards, and `helpdesk.css` adds only the ticket-list styling. It uses system fonts (no outside resources), follows the visitor's light or dark setting, works at phone width and shows a visible focus ring for keyboard users. To restyle the whole site, change the colour variables at the top of `site.css`.
+The whole site uses one design system in `site.css`. Change the colour tokens at the top of that file (and the dark-theme block under it) to re-skin everything.
+
+- **Look:** cobalt primary, aurora-teal accent, cool slate neutrals and a deep ink sidebar. Typography uses the system font stack, so nothing is loaded from outside. Components share one radius, shadow and spacing scale.
+- **Two layouts:** the public home page (`index.html`) has a top bar and a hero; every tool page (`dashboard.html`, `crm.html`, `helpdesk.html`, `automation.html`, `troubleshoot.html`, `staff.html`, `settings.html`) has the console shell: sidebar (a drawer on phones), top bar with breadcrumb, theme toggle, notifications bell and profile chip.
+- **Dashboard:** `dashboard.html` / `dashboard.js` shows stat cards, the pipeline by stage, open tickets and cases by priority, a "needs attention" list and recent automation activity, all read from the data saved in the browser (the first visit seeds the same demo data as the CRM and Help Desk), with empty states when there is nothing yet.
+- **Charts:** `charts.js` is a small plain-SVG chart kit (animated bar and donut charts with tooltips, legends and a phone layout). No chart library is used. The CRM chart keeps its test hooks (`rect.bar[data-stage][data-count]` and a text description).
+- **`ui.js`:** inline SVG icons, the dark/light toggle (saved as `ui.theme`), the sidebar drawer, the notifications bell (overdue tickets and cases, open P1 tickets, outbox alerts), the profile chip (the signed-in Staff user), and the search box and filter chips for tables and lists (`<div class="toolbar" data-filter-for="#list" data-items="li.ticket">`).
+- Works from phone to wide desktop, follows the system light or dark setting until you choose one, and keeps a visible focus ring for keyboard users.
 
 ## CRM
 

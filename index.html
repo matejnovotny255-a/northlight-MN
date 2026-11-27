@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#0e1a2e">
+  <meta name="theme-color" content="#0a1020">
   <title>Northlight Studio | 25-Person Design Studio</title>
   <meta name="description" content="Northlight Studio is a 25-person design studio creating brand identities, web and product design, and design workshops.">
   <link rel="canonical" href="https://matejnovotny255-a.github.io/northlight-MN/">
@@ -42,31 +42,19 @@
   </script>
 
   <link rel="stylesheet" href="site.css">
+  <script>try{var t=localStorage.getItem('ui.theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header">
+  <header class="mk-header">
     <div class="wrap bar">
-      <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
-      <nav aria-label="Main">
-        <ul>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#faq">FAQ</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-          <li class="menu">
-            <details class="menu-d">
-              <summary>Tools</summary>
-            <ul>
-              <li><a href="crm.html">CRM</a></li>
-              <li><a href="helpdesk.html">Help Desk</a></li>
-              <li><a href="automation.html">Automation</a></li>
-              <li><a href="troubleshoot.html">Troubleshoot</a></li>
-              <li><a href="staff.html">Staff</a></li>
-              <li><a href="settings.html">Settings</a></li>
-            </ul>
-            </details>
-          </li>
-        </ul>
+      <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f6dff"/><stop offset="1" stop-color="#12a594"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M6 22c3-9 9-13 20-12-6 1-10 4-12 12z" fill="#fff" opacity=".95"/><circle cx="22.5" cy="21" r="2.6" fill="#fff" opacity=".85"/></svg><span>Northlight Studio</span></a>
+      <nav class="mk-nav" aria-label="Main">
+        <a href="index.html#services" class="hide-sm">Services</a>
+        <a href="index.html#faq" class="hide-sm">FAQ</a>
+        <a href="index.html#contact" class="hide-sm">Contact</a>
+        <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle theme"><i data-icon="moon"></i></button>
+        <a class="btn" href="dashboard.html"><span class="hide-sm">Open&nbsp;</span>console<i data-icon="arrow-right"></i></a>
       </nav>
     </div>
   </header>
@@ -76,11 +64,11 @@
       <div class="wrap">
         <div>
           <p class="eyebrow">Design studio · 25 people</p>
-          <h1>Design that makes your work stand out</h1>
-          <p>Northlight Studio is a design studio of 25 people. We craft clear, thoughtful brands, products and experiences.</p>
+          <h1>Design that makes your <em>work stand out</em></h1>
+          <p class="lede">Northlight Studio is a design studio of 25 people. We craft clear, thoughtful brands, products and experiences.</p>
           <div class="cta">
-            <a class="btn" href="#contact">Start a project</a>
-            <a class="btn ghost" href="#services">See what we do</a>
+            <a class="btn light lg" href="#contact">Start a project</a>
+            <a class="btn outline-light lg" href="#services">See what we do</a>
           </div>
           <ul class="facts" aria-label="Studio facts">
             <li><strong>25</strong><span>designers and leads</span></li>
@@ -88,12 +76,13 @@
             <li><strong>3</strong><span>core services</span></li>
           </ul>
         </div>
-        <img src="assets/hero.svg" width="640" height="320" alt="Illustration of a sun rising behind blue mountains, representing the Northlight Studio brand">
+        <img src="assets/hero.svg" width="640" height="440" alt="Northern lights in teal and violet glowing above dark mountains, representing the Northlight Studio brand">
       </div>
     </div>
 
     <section class="block" id="services" aria-labelledby="services-h">
       <div class="wrap">
+        <p class="kicker">Services</p>
         <h2 id="services-h">What we do</h2>
         <p class="lead">Three ways we can help, from a first logo to a whole product.</p>
         <div class="cards">
@@ -116,8 +105,9 @@
       </div>
     </section>
 
-    <section class="block" id="faq" aria-labelledby="faq-h">
+    <section class="block faq" id="faq" aria-labelledby="faq-h">
       <div class="wrap">
+        <p class="kicker">FAQ</p>
         <h2 id="faq-h">Frequently asked questions</h2>
         <details>
           <summary>What does Northlight Studio do?</summary>
@@ -142,6 +132,7 @@
       <div class="wrap">
         <div class="contact-grid">
           <div>
+            <p class="kicker">Contact</p>
             <h2 id="contact-h">Tell us about your project</h2>
             <p class="lead">Send a short message and we will reply with next steps. Your enquiry is logged as a ticket so it never gets lost.</p>
           </div>
@@ -178,10 +169,10 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="mk-footer">
     <div class="wrap">
-      <span>Northlight Studio. A demo site with fake data.</span>
-      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff</a> · <a href="settings.html">Settings</a></span>
+      <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f6dff"/><stop offset="1" stop-color="#12a594"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M6 22c3-9 9-13 20-12-6 1-10 4-12 12z" fill="#fff" opacity=".95"/><circle cx="22.5" cy="21" r="2.6" fill="#fff" opacity=".85"/></svg><span>Northlight Studio</span></a>
+      <span>A demo site with fake data · <a href="index.html">Website</a> · <a href="dashboard.html">Dashboard</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff</a> · <a href="settings.html">Settings</a></span>
     </div>
   </footer>
 
@@ -237,6 +228,6 @@
       checks.forEach(([, inputId, errId]) => $(inputId).addEventListener('input', () => { $(errId).textContent = ''; $(inputId).removeAttribute('aria-invalid'); }));
     })();
   </script>
-  <script src="site.js"></script>
+  <script src="ui.js"></script>
 </body>
 </html>

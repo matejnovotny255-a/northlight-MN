@@ -131,8 +131,6 @@
   const cfg = window.NorthlightConfig || {};  // settings from config.js (locale, currency)
   const money = n => new Intl.NumberFormat(cfg.locale || undefined, { style: 'currency', currency: cfg.currency || 'EUR', maximumFractionDigits: 0 }).format(n || 0);
   const when = iso => new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
-  const SVGNS = 'http://www.w3.org/2000/svg';
-  const svg = (tag, attrs, text) => { const e = document.createElementNS(SVGNS, tag); Object.entries(attrs || {}).forEach(([k, v]) => e.setAttribute(k, v)); if (text != null) e.textContent = text; return e; };
 
   function say(id, msg, good) { const n = $(id); n.textContent = msg || ''; n.className = 'msg ' + (good ? 'good' : 'bad'); }
   const accName = (d, id) => { const a = d.accounts.find(x => x.id === id); return a ? a.name : '—'; };
@@ -144,33 +142,20 @@
     else rows.forEach(r => body.append(r));
   }
 
-  // ----- Chart: opportunities by stage, plain SVG -----
+  // ----- Chart: opportunities by stage (drawn by charts.js, plain SVG) -----
+  // Keeps the same hooks as before: rect.bar[data-stage][data-count], .bar-<Stage>, and a text description.
   function drawChart(opps) {
     const data = stageSummary(opps);
-    const W = 640, H = 330, L = 44, R = 16, T = 28, B = 62;
-    const plotW = W - L - R, plotH = H - T - B;
-    const maxCount = Math.max(1, ...data.map(x => x.count));
-    const step = Math.max(1, Math.ceil(maxCount / 5));
-    const top = Math.ceil(maxCount / step) * step;
-    const slot = plotW / data.length, barW = Math.min(76, slot * 0.6);
     const label = 'Opportunities by stage: ' + data.map(x => x.stage + ' ' + x.count).join(', ') + '.';
-
-    const root = svg('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-labelledby': 'chartTitle chartDesc', class: 'chart-svg', preserveAspectRatio: 'xMidYMid meet' });
-    root.append(svg('title', { id: 'chartTitle' }, 'Opportunities by stage'), svg('desc', { id: 'chartDesc' }, label));
-    for (let v = 0; v <= top; v += step) {
-      const y = T + plotH - (v / top) * plotH;
-      root.append(svg('line', { x1: L, x2: W - R, y1: y, y2: y, class: v === 0 ? 'axis' : 'grid' }));
-      root.append(svg('text', { x: L - 8, y: y + 4, class: 'tick', 'text-anchor': 'end' }, String(v)));
-    }
-    data.forEach((s, i) => {
-      const cx = L + slot * i + slot / 2;
-      const h = (s.count / top) * plotH;
-      root.append(svg('rect', { x: cx - barW / 2, y: T + plotH - h, width: barW, height: h, rx: 4, class: 'bar bar-' + s.stage, 'data-stage': s.stage, 'data-count': s.count }));
-      root.append(svg('text', { x: cx, y: T + plotH - h - 7, class: 'bar-count', 'text-anchor': 'middle' }, String(s.count)));
-      root.append(svg('text', { x: cx, y: H - B + 20, class: 'stage-label', 'text-anchor': 'middle' }, s.stage));
-      root.append(svg('text', { x: cx, y: H - B + 38, class: 'amount-label', 'text-anchor': 'middle' }, money(s.amount)));
+    window.NL.charts.bar($('chart'), {
+      title: 'Opportunities by stage',
+      desc: label,
+      data: data.map(s => ({
+        key: s.stage, label: s.stage, value: s.count, sub: money(s.amount),
+        cls: 'bar-' + s.stage, attrs: { 'data-stage': s.stage, 'data-count': s.count },
+        tip: s.count + (s.count === 1 ? ' opportunity' : ' opportunities') + ' · ' + money(s.amount)
+      }))
     });
-    const box = $('chart'); box.replaceChildren(root);
     $('chartNote').textContent = opps.length ? '' : 'No opportunities yet. Convert a lead to create one.';
   }
 

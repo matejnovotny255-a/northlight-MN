@@ -4,45 +4,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#0e1a2e">
+  <meta name="theme-color" content="#0a1020">
   <title>CRM | Northlight Studio</title>
   <link rel="stylesheet" href="site.css">
+  <script>try{var t=localStorage.getItem('ui.theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="wrap bar">
-      <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
-      <nav aria-label="Main">
-        <ul>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#faq">FAQ</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-          <li class="menu">
-            <details class="menu-d">
-              <summary class="is-active">Tools</summary>
-            <ul>
-              <li><a href="crm.html" aria-current="page">CRM</a></li>
-              <li><a href="helpdesk.html">Help Desk</a></li>
-              <li><a href="automation.html">Automation</a></li>
-              <li><a href="troubleshoot.html">Troubleshoot</a></li>
-              <li><a href="staff.html">Staff</a></li>
-              <li><a href="settings.html">Settings</a></li>
-            </ul>
-            </details>
-          </li>
-        </ul>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Primary">
+      <div class="sidebar-head">
+        <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f6dff"/><stop offset="1" stop-color="#12a594"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M6 22c3-9 9-13 20-12-6 1-10 4-12 12z" fill="#fff" opacity=".95"/><circle cx="22.5" cy="21" r="2.6" fill="#fff" opacity=".85"/></svg><span>Northlight</span></a>
+        <button type="button" class="icon-btn sidebar-close" aria-label="Close menu"><i data-icon="x"></i></button>
+      </div>
+      <nav class="side-nav" aria-label="Main">
+        <p class="side-label">Workspace</p>
+        <a href="dashboard.html"><i data-icon="grid"></i>Dashboard</a>
+        <a href="crm.html" aria-current="page"><i data-icon="users"></i>CRM</a>
+        <a href="helpdesk.html"><i data-icon="lifebuoy"></i>Help Desk</a>
+        <a href="automation.html"><i data-icon="zap"></i>Automation</a>
+        <p class="side-label">Resources</p>
+        <a href="troubleshoot.html"><i data-icon="compass"></i>Troubleshoot</a>
+        <p class="side-label">Administration</p>
+        <a href="staff.html"><i data-icon="shield"></i>Staff access</a>
+        <a href="settings.html"><i data-icon="sliders"></i>Settings</a>
       </nav>
-    </div>
-  </header>
-  <div class="page-head">
-    <div class="wrap">
-      <h1>CRM</h1>
-      <p>Leads, accounts, contacts, opportunities and support cases. A learning model with fake data, saved only in your browser.</p>
-    </div>
-  </div>
-
-  <main class="wrap page-body" id="main">
+      <div class="sidebar-foot">
+        <a href="index.html"><i data-icon="arrow-left"></i>Back to website</a>
+        <span class="ver" id="verLabel">Northlight Console</span>
+      </div>
+    </aside>
+    <div class="scrim" data-close-nav></div>
+    <div class="main-col">
+      <header class="topbar">
+        <button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><i data-icon="menu"></i></button>
+        <div class="crumbs"><span>Console</span><i data-icon="chevron"></i><strong>CRM</strong></div>
+        <div class="top-actions">
+          <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle theme"><i data-icon="moon"></i></button>
+          <div class="notif">
+            <button type="button" class="icon-btn" id="bellBtn" aria-label="Notifications" aria-expanded="false" aria-controls="bellPanel"><i data-icon="bell"></i><span class="dot" id="bellCount" hidden>0</span></button>
+            <div class="popover" id="bellPanel" hidden>
+              <header>Notifications</header>
+              <ul></ul>
+              <div class="allgood"><i data-icon="check"></i>You are all caught up.</div>
+            </div>
+          </div>
+          <a class="profile" href="staff.html" id="profile"><span class="avatar" id="profAvatar">G</span><span class="who"><strong id="profName">Guest</strong><small id="profRole">Not signed in</small></span></a>
+        </div>
+      </header>
+      <div class="page-head">
+        <div>
+          <h1>CRM</h1>
+          <p>Leads, accounts, contacts, opportunities and support cases. A learning model with fake data, saved only in your browser.</p>
+        </div>
+      </div>
+      <main class="page-body" id="main">
     <div class="tabs" role="tablist" aria-label="CRM sections">
       <button type="button" role="tab" class="tab" data-tab="overview" aria-selected="true">Overview</button>
       <button type="button" role="tab" class="tab" data-tab="leads" aria-selected="false" tabindex="-1">Leads (<span data-count="leads">0</span>)</button>
@@ -68,13 +84,25 @@
         <button type="submit">Add lead</button>
       </form>
       <p class="msg" id="leadMsg" role="status"></p>
+      <div class="toolbar" data-filter-for="#leadsBody" data-items="tr">
+        <label class="search" style="margin:0"><i data-icon="search"></i><input type="search" placeholder="Search leads..." aria-label="Search leads" autocomplete="off"></label>
+        
+      </div>
       <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Company</th><th>Email</th><th>Value</th><th>Status</th><th></th></tr></thead><tbody id="leadsBody"></tbody></table></div>
     </section>
 
     <section id="tab-accounts" role="tabpanel" aria-label="Accounts and contacts" hidden>
       <h2>Accounts</h2>
+      <div class="toolbar" data-filter-for="#accountsBody" data-items="tr">
+        <label class="search" style="margin:0"><i data-icon="search"></i><input type="search" placeholder="Search accounts..." aria-label="Search accounts" autocomplete="off"></label>
+        
+      </div>
       <div class="table-wrap"><table><thead><tr><th>ID</th><th>Account</th><th>Contacts</th><th>Opportunities</th></tr></thead><tbody id="accountsBody"></tbody></table></div>
       <h2 style="margin-top:2rem">Contacts</h2>
+      <div class="toolbar" data-filter-for="#contactsBody" data-items="tr">
+        <label class="search" style="margin:0"><i data-icon="search"></i><input type="search" placeholder="Search contacts..." aria-label="Search contacts" autocomplete="off"></label>
+        
+      </div>
       <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Account</th></tr></thead><tbody id="contactsBody"></tbody></table></div>
     </section>
 
@@ -88,6 +116,10 @@
         <button type="submit">Add opportunity</button>
       </form>
       <p class="msg" id="oppMsg" role="status"></p>
+      <div class="toolbar" data-filter-for="#oppsBody" data-items="tr">
+        <label class="search" style="margin:0"><i data-icon="search"></i><input type="search" placeholder="Search opportunities..." aria-label="Search opportunities" autocomplete="off"></label>
+        
+      </div>
       <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Account</th><th>Amount</th><th>Stage</th></tr></thead><tbody id="oppsBody"></tbody></table></div>
     </section>
 
@@ -102,22 +134,24 @@
       </form>
       <p class="hint">Due time is suggested from the priority (Critical 4 h, High 8 h, Medium 24 h, Low 72 h) and can be changed.</p>
       <p class="msg" id="caseMsg" role="status"></p>
+      <div class="toolbar" data-filter-for="#casesBody" data-items="tr">
+        <label class="search" style="margin:0"><i data-icon="search"></i><input type="search" placeholder="Search cases..." aria-label="Search cases" autocomplete="off"></label>
+        <div class="chips" role="group" aria-label="Filter cases"><button type="button" class="chip" aria-pressed="false" data-sel=".pr-Critical">Critical</button><button type="button" class="chip" aria-pressed="false" data-sel=".pr-High">High</button><button type="button" class="chip" aria-pressed="false" data-sel=".pr-Medium">Medium</button><button type="button" class="chip" aria-pressed="false" data-sel=".pr-Low">Low</button><button type="button" class="chip" aria-pressed="false" data-sel=".tag-overdue">Overdue</button></div>
+      </div>
       <div class="table-wrap"><table><thead><tr><th>ID</th><th>Subject</th><th>Account</th><th>Priority</th><th>Due</th><th>Status</th><th></th></tr></thead><tbody id="casesBody"></tbody></table></div>
     </section>
 
     <p class="hint">Fake data, stored in this browser only. <button type="button" class="secondary small" id="reset">Reset sample data</button></p>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap">
-      <span>Northlight Studio. A demo site with fake data.</span>
-      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff</a> · <a href="settings.html">Settings</a></span>
+  
+      </main>
+      <footer class="app-foot"><span>Northlight Studio · demo with fake data, stored in this browser only</span><span><a href="index.html">Website</a> · <a href="dashboard.html">Dashboard</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="automation.html">Automation</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff</a> · <a href="settings.html">Settings</a></span></footer>
     </div>
-  </footer>
+  </div>
 
+  <script src="charts.js"></script>
   <script src="config.js"></script>
 
   <script src="crm.js"></script>
-  <script src="site.js"></script>
+  <script src="ui.js"></script>
 </body>
 </html>

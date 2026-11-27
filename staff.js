@@ -224,6 +224,7 @@
 
   function renderSession() {
     const u = currentUser();
+    window.dispatchEvent(new Event('staff-session')); // lets the top bar profile chip refresh
     $('signin').hidden = !!u;
     $('app').hidden = !u;
     $('step1').hidden = !!pending; $('step2').hidden = !pending;

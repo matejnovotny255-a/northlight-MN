@@ -93,7 +93,11 @@
     });
   }
 
+  // Exposed so the dashboard can seed and read tickets without the page UI.
+  window.HelpdeskModel = { seed, load, priorityFor, isOverdue, TARGETS };
+
   const form = document.getElementById('form');
+  if (!form) return; // loaded only for its model (for example on the dashboard)
   const preview = document.getElementById('preview');
   const rules = {
     requester: v => v ? '' : 'Requester is required.',
