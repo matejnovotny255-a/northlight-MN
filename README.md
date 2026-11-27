@@ -63,3 +63,12 @@ Each check prints PASS or FAIL (or SKIP when it cannot be read). Many routers ig
 ## Design
 
 All four pages share one look: `site.css` holds the colours, header, footer, buttons, forms, tables and cards, and `helpdesk.css` adds only the ticket-list styling. It uses system fonts (no outside resources), follows the visitor's light or dark setting, works at phone width and shows a visible focus ring for keyboard users. To restyle the whole site, change the colour variables at the top of `site.css`.
+
+## CRM
+
+`crm.html` and `crm.js` are a small CRM in plain JavaScript and localStorage (key `crm.data.v1`): leads, accounts, contacts, opportunities with stages (Lead, Qualified, Quote, Won, Lost) and support cases. Everything is fake demo data in your browser.
+
+- **Convert** turns a lead into an account, a contact and a Qualified opportunity in one step. A lead converts only once, and a lead from a company that already has an account is attached to that account instead of creating a duplicate.
+- **Support cases** have a priority and a due time. The due time is suggested from the priority (Critical 4 h, High 8 h, Medium 24 h, Low 72 h) and must be in the future. An open case past its due time shows an Overdue label.
+- **Opportunities by stage** is a bar chart drawn with plain SVG (no libraries) with counts and amounts, and a text description for screen readers.
+- Seed data: three fake leads and one open case, created once. "Reset sample data" restores them.

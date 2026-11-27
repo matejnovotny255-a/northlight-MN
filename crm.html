@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRM | Northlight Studio</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html"><span class="sun" aria-hidden="true"></span>Northlight Studio</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="crm.html" aria-current="page">CRM</a></li>
+          <li><a href="helpdesk.html">Help Desk</a></li>
+          <li><a href="troubleshoot.html">Troubleshoot</a></li>
+          <li><a href="staff.html">Staff</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>CRM</h1>
+      <p>Leads, accounts, contacts, opportunities and support cases. A learning model with fake data, saved only in your browser.</p>
+    </div>
+  </div>
+
+  <main class="wrap page-body">
+    <div class="tabs" role="tablist" aria-label="CRM sections">
+      <button type="button" role="tab" class="tab" data-tab="overview" aria-selected="true">Overview</button>
+      <button type="button" role="tab" class="tab" data-tab="leads" aria-selected="false" tabindex="-1">Leads (<span data-count="leads">0</span>)</button>
+      <button type="button" role="tab" class="tab" data-tab="accounts" aria-selected="false" tabindex="-1">Accounts and contacts (<span data-count="accounts">0</span>/<span data-count="contacts">0</span>)</button>
+      <button type="button" role="tab" class="tab" data-tab="opps" aria-selected="false" tabindex="-1">Opportunities (<span data-count="opps">0</span>)</button>
+      <button type="button" role="tab" class="tab" data-tab="cases" aria-selected="false" tabindex="-1">Cases (<span data-count="cases">0</span> open)</button>
+    </div>
+
+    <section id="tab-overview" role="tabpanel" aria-label="Overview">
+      <h2>Opportunities by stage</h2>
+      <div class="tiles" id="tiles"></div>
+      <div class="chart" id="chart"></div>
+      <p class="hint" id="chartNote"></p>
+    </section>
+
+    <section id="tab-leads" role="tabpanel" aria-label="Leads" hidden>
+      <h2>Leads</h2>
+      <form id="leadForm" class="inline-form" novalidate>
+        <label>Name <input id="leadName" maxlength="80" autocomplete="off"></label>
+        <label>Company <input id="leadCompany" maxlength="80" autocomplete="off"></label>
+        <label>Email <input id="leadEmail" type="email" maxlength="120" autocomplete="off"></label>
+        <label>Expected value (EUR) <input id="leadValue" type="number" min="0" step="100" inputmode="numeric"></label>
+        <button type="submit">Add lead</button>
+      </form>
+      <p class="msg" id="leadMsg" role="status"></p>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Company</th><th>Email</th><th>Value</th><th>Status</th><th></th></tr></thead><tbody id="leadsBody"></tbody></table></div>
+    </section>
+
+    <section id="tab-accounts" role="tabpanel" aria-label="Accounts and contacts" hidden>
+      <h2>Accounts</h2>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Account</th><th>Contacts</th><th>Opportunities</th></tr></thead><tbody id="accountsBody"></tbody></table></div>
+      <h2 style="margin-top:2rem">Contacts</h2>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Account</th></tr></thead><tbody id="contactsBody"></tbody></table></div>
+    </section>
+
+    <section id="tab-opps" role="tabpanel" aria-label="Opportunities" hidden>
+      <h2>Opportunities</h2>
+      <form id="oppForm" class="inline-form" novalidate>
+        <label>Name <input id="oppName" maxlength="80" autocomplete="off"></label>
+        <label>Account <select id="oppAccount"></select></label>
+        <label>Amount (EUR) <input id="oppAmount" type="number" min="0" step="100" inputmode="numeric"></label>
+        <label>Stage <select id="oppStage"></select></label>
+        <button type="submit">Add opportunity</button>
+      </form>
+      <p class="msg" id="oppMsg" role="status"></p>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Account</th><th>Amount</th><th>Stage</th></tr></thead><tbody id="oppsBody"></tbody></table></div>
+    </section>
+
+    <section id="tab-cases" role="tabpanel" aria-label="Support cases" hidden>
+      <h2>Support cases</h2>
+      <form id="caseForm" class="inline-form" novalidate>
+        <label>Subject <input id="caseSubject" maxlength="120" autocomplete="off"></label>
+        <label>Account <select id="caseAccount"></select></label>
+        <label>Priority <select id="casePriority"></select></label>
+        <label>Due <input id="caseDue" type="datetime-local"></label>
+        <button type="submit">Add case</button>
+      </form>
+      <p class="hint">Due time is suggested from the priority (Critical 4 h, High 8 h, Medium 24 h, Low 72 h) and can be changed.</p>
+      <p class="msg" id="caseMsg" role="status"></p>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Subject</th><th>Account</th><th>Priority</th><th>Due</th><th>Status</th><th></th></tr></thead><tbody id="casesBody"></tbody></table></div>
+    </section>
+
+    <p class="hint">Fake data, stored in this browser only. <button type="button" class="secondary small" id="reset">Reset sample data</button></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Northlight Studio. A demo site with fake data.</span>
+      <span><a href="index.html">Home</a> · <a href="crm.html">CRM</a> · <a href="helpdesk.html">Help Desk</a> · <a href="troubleshoot.html">Troubleshoot</a> · <a href="staff.html">Staff access</a></span>
+    </div>
+  </footer>
+
+  <script src="crm.js"></script>
+</body>
+</html>
